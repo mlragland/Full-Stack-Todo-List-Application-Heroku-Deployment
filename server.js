@@ -6,6 +6,9 @@ const app = express();  // Define the `app` constant
 app.use(cors());  // Use `cors` as middleware
 
 const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/todo-list', { useNewUrlParser: true, useUnifiedTopology: true });
