@@ -1,9 +1,10 @@
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
-const cors = require('cors');  
+const cors = require('cors');
 
-const app = express();  
-app.use(cors());  
+const app = express();
+app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
@@ -23,6 +24,9 @@ const Task = mongoose.model('Task', taskSchema);
 
 // Parse JSON requests
 app.use(express.json());
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Create a new task
 app.post('/tasks', async (req, res) => {
@@ -55,11 +59,6 @@ app.delete('/tasks/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Failed to delete task' });
   }
-});
-
-// define  a root route
-app.get('/', (req, res) => {
-    res.send('Hello, World!');
 });
 
 // Start the server
