@@ -4,7 +4,7 @@ const taskList = document.getElementById('task-list');
 
 // Fetch tasks from the server and display them
 async function fetchTasks() {
-  const response = await fetch('http://localhost:3000/tasks');
+  const response = await fetch('/tasks');
   const tasks = await response.json();
   
   // Clear the task list
@@ -27,42 +27,43 @@ async function fetchTasks() {
 
 // Add a new task
 form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const task = input.value.trim();
+  e.preventDefault();
+  const task = input.value.trim();
+  
+  if (task !== '') {
+    const response = await fetch('/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ task }),
+    });
     
-    if (task !== '') {
-      const response = await fetch('http://localhost:3000/tasks', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ task }),
-      });
-      
-      const newTask = await response.json();
-      
-      const li = document.createElement('li');
-      li.innerHTML = `
-        <input type="checkbox">
-        <span>${newTask.task}</span>
-        <button data-id="${newTask._id}">Delete</button>
-      `;
-      taskList.appendChild(li);
-      input.value = '';
-    }
-  });
+    const newTask = await response.json();
+    
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <input type="checkbox">
+      <span>${newTask.task}</span>
+      <button data-id="${newTask._id}">Delete</button>
+    `;
+    taskList.appendChild(li);
+    input.value = '';
+  }
+});
 
 // Delete a task
 taskList.addEventListener('click', async (e) => {
-    if (e.target.nodeName === 'BUTTON') {
-      const id = e.target.dataset.id;
-      
-      await fetch(`http://localhost:3000/tasks/${id}`, {
-        method: 'DELETE',
-      });
-      
-      e.target.parentNode.remove();
-    }
-  });
+  if (e.target.nodeName === 'BUTTON') {
+    const id = e.target.dataset.id;
+    
+    await fetch(`/tasks/${id}`, {
+      method: 'DELETE',
+    });
+    
+    e.target.parentNode.remove();
+  }
+});
+
 // Fetch tasks when the page loads
 fetchTasks();
