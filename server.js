@@ -1,14 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');  // Import the `cors` package
+const cors = require('cors');  
 
-const app = express();  // Define the `app` constant
-app.use(cors());  // Use `cors` as middleware
+const app = express();  
+app.use(cors());  
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/todo-list', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -60,12 +57,12 @@ app.delete('/tasks/:id', async (req, res) => {
   }
 });
 
+// define  a root route
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
-
-// define  a root route
-app.get('/', (req, res) => {
-    res.send('Hello, World!');
-  });
