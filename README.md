@@ -8,6 +8,7 @@ This repository contains the code for a full-stack To-Do List application built 
 The application allows users to add tasks to a to-do list, and delete them when completed. The tasks are stored in a MongoDB database, so they persist across sessions.
 
 The front-end of the application is built with HTML, CSS, and JavaScript. It provides a simple and intuitive user interface for interacting with the to-do list.
+The interface now uses Bootstrap 5 for a modern, responsive layout. A dark mode toggle lets you switch themes without reloading the page.
 
 The back-end of the application is built with Node.js and Express.js. It provides API endpoints for creating, retrieving, and deleting tasks.
 
