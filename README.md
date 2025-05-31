@@ -33,6 +33,9 @@ node server.js
 
 Then, open `index.html` in a web browser to interact with the application.
 
+The interface uses [Bootstrap](https://getbootstrap.com/) for styling and layout.
+You can enable a built-in dark mode using the toggle switch on the page.
+
 ## Deployment
 
 This application is ready to be deployed on a platform like Heroku. A `Procfile` is included in the repository, which specifies the commands to be executed by the Heroku platform to start the application.

@@ -15,11 +15,10 @@ async function fetchTasks() {
   // Add each task to the task list
   for (const task of tasks) {
     const li = document.createElement('li');
-    li.dataset.id = task._id;
     li.innerHTML = `
       <input type="checkbox">
       <span>${task.task}</span>
-      <button>Delete</button>
+      <button data-id="${task._id}">Delete</button>
     `;
     taskList.appendChild(li);
   }
@@ -67,3 +66,14 @@ taskList.addEventListener('click', async (e) => {
 
 // Fetch tasks when the page loads
 fetchTasks();
+
+// Toggle dark mode
+const darkModeToggle = document.getElementById('darkModeToggle');
+if (darkModeToggle) {
+  darkModeToggle.addEventListener('change', () => {
+    document.documentElement.setAttribute(
+      'data-bs-theme',
+      darkModeToggle.checked ? 'dark' : 'light'
+    );
+  });
+}
