@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Maurice's To-do-List</title>
+    <meta charset="utf-8">
+    <title>Simple Photobooth</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <div class="container">
-      <h1>Maurice's To-do-List</h1>
-      <form id="task-form">
-        <input type="text" id="task-input" placeholder="Enter a task" required>
-        <button type="submit">Add Task</button>
-      </form>
-      <ul id="task-list"></ul>
+    <h1>Photobooth</h1>
+    <div class="booth">
+      <video id="video" autoplay playsinline></video>
+      <button id="snap">Take Photo</button>
+      <canvas id="canvas" class="hidden"></canvas>
+      <div id="photos"></div>
     </div>
     <script src="script.js"></script>
   </body>
